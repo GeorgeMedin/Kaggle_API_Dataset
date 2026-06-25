@@ -1,0 +1,374 @@
+{
+  "info": {
+    "_postman_id": "53833da3-defc-4403-b6a6-36d86955eea7",
+    "name": "Kaggle API",
+    "description": "# API de Dataset de Kaggle\n\n**Endpoint base:** [https://script.google.com/macros/s/AKfycbxjF06rPJX5iJ0sDRu3HZsysXG2m7gD2ybL6rtFYXjEF84KZ4PdMSUy5uOz1VocWlz7BQ/exec](https://script.google.com/macros/s/AKfycbxjF06rPJX5iJ0sDRu3HZsysXG2m7gD2ybL6rtFYXjEF84KZ4PdMSUy5uOz1VocWlz7BQ/exec)\n\nRealice esta API con fines de estudio y practica de como consumir APIS en diferentes lenguajes como Python, TypeScript e inclusivo desde programas como Excel, Power BI o PostMan. Solo con fines de estudio.\n\n_**Pre-requisitos para usar el API:**_\n\n| **Tipo:** | API HTTP estilo REST (REST-like API) |\n| --- | --- |\n| **Credenciales:** | Se deben solicitar por medio de un endpoint especifico la solicitud de credenciales para acceder a los usos del API  <br>  <br>**e-mail:** dato básico para poder acceder a usuario y contraseña  <br>**user,**  <br>**password**  <br>  <br>Las anteriores credenciales que llegarán vía correo, se deben usar para la solicitud de llaves (keys) de acceso |\n\nLas anteriores credenciales que llegarán vía correo, se deben usar para la solicitud de llaves (keys) de acceso  \n[Ver endpoint](https://georgemedin-74227.postman.co/workspace/ec17dc4c-01bd-4db9-896d-667fadbd68ef/folder/52591381-72e73f41-9228-46e8-9f24-349037b4426f?action=share&source=copy-link&creator=52591381)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52591381",
+    "_collection_link": "https://go.postman.co/collection/52591381-53833da3-defc-4403-b6a6-36d86955eea7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Access & Keys",
+      "item": [
+        {
+          "name": "create_key",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{base_url}}?action=create_key&user={{usuario}}&pass={{contraseña}}",
+              "host": [
+                "{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "create_key"
+                },
+                {
+                  "key": "user",
+                  "value": "{{usuario}}"
+                },
+                {
+                  "key": "pass",
+                  "value": "{{contraseña}}"
+                }
+              ]
+            },
+            "description": "Una vez que el usuario ha recibido sus credenciales de acceso (**usuario y contraseña**), el siguiente paso consiste en generar una **API Key**.\n\nLa API Key funciona como un mecanismo de autenticación para consumir los endpoints protegidos de la API.  \nEn otras palabras, esta llave será obligatoria para realizar consultas, registrar datasets, listar datasets y ejecutar cualquier operación sobre la información disponible\n\n---\n\nPara generar una API Key, se debe realizar una solicitud al endpoint correspondiente, enviando como parámetros el **usuario** (o correo electrónico registrado) y la **contraseña** asignada.\n\n**Resultado esperado:**\n\n```\n{\n  \"ok\": true,\n  \"message\": \"API key generada correctamente\",\n  \"data\": {\n    \"user\": \"SuUsuario\",\n    \"email\": \"SuEmail@correo.com\",\n    \"api_key\": \"Dcqyb7LWMjRrY0MqSl8w\"\n  }\n}\n\n ```\n\n**Respuesta en caso de error:**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Unauthorized\",\n  \"message\": \"Usuario o contraseña inválidos\"\n}\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "Esta API utiliza un sistema de autenticación basado en credenciales (usuario y contraseña), las cuales son generadas automáticamente para cada usuario.\n\nEstas credenciales serán necesarias posteriormente para generar una **API Key**, la cual permitirá consumir los diferentes endpoints disponibles.\n\nPara iniciar el proceso, debes acceder al siguiente formulario:\n\n👉 [Solicitar Usuario](https://script.google.com/macros/s/AKfycbwMq5B5C975dxUSeG_fE8-PQtJpSznWL9oZEmq5sDcDCA9dFZloXwgwX10aFhXRYO11Lg/exec)\n\nEste formulario solicita un **correo electrónico válido**, el cual será utilizado **unicamente** para enviar las credenciales de acceso.\n\n<img src=\"https://content.pstmn.io/1b8d2cf8-13a0-4047-a3ca-546a249232ca/aW1hZ2UucG5n\" alt=\"\" height=\"727\" width=\"1252\">\n\nLas credenciales serán enviadas al correo electrónico registrado.\n\n⚠️ Es importante revisar:\n\n- Bandeja de entrada\n    \n- Carpeta de spam o correo no deseado\n    \n\nRespuesa esperada:\n\n<img src=\"https://content.pstmn.io/b6f676e3-8931-4585-b95a-db4a31ab7e2d/aW1hZ2UucG5n\" alt=\"\" height=\"570\" width=\"1401\">"
+    },
+    {
+      "name": "Data Management",
+      "item": [
+        {
+          "name": "register_dataset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=register_dataset&api_key={{api_key}}&url={{dataset_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "register_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "url",
+                  "value": "{{dataset_url}}"
+                }
+              ]
+            },
+            "description": "La operación **Register Dataset** permite registrar un nuevo dataset dentro de la API a partir de una URL pública en github que apunte a un archivo **CSV**.\n\nCuando el dataset se registra correctamente:\n\n- Si el nombre del archivo **no existe**, se crea un nuevo registro.\n    \n- Si el nombre del archivo **ya existe**, la API actualiza la URL asociada a ese dataset.\n    \n\nEste endpoint requiere una **API Key válida**, la cual debe enviarse como parámetro en la solicitud.\n\n**Ejemplo de registro de dataset:**\n\nPara este ejemplo practico tomaremos el siguiente archivo .csv que se encuentra cargado en github: [Ver link de github](https://github.com/fatih-boyar/coffee-quality-data-CQI/blob/main/df_arabica_clean.csv)\n\nLa API solicitará la URL tal y como aparece en el navegador cuando accedemos al archivo .csv desde github\n\n<img src=\"https://content.pstmn.io/671722c9-e0f9-41d1-896b-38e628654398/aW1hZ2UucG5n\" width=\"1854\" height=\"926\">\n\n**Resultado esperada:**\n\nEn caso de que se registre un nuevo dataset:\n\n```\n{\n  \"ok\": true,\n  \"message\": \"Dataset registrado\",\n  \"data\": {\n    \"name\": \"df_arabica_clean.csv\",\n    \"url\": \"https://raw.githubusercontent.com/fatih-boyar/coffee-quality-data-CQI/main/df_arabica_clean.csv\"\n  }\n}\n\n ```\n\nEn caso de que se registre un dataset que ya existia, el API lo actualizará:\n\n```\n{\n  \"ok\": true,\n  \"message\": \"Dataset actualizado\",\n  \"data\": {\n    \"name\": \"df_arabica_clean.csv\",\n    \"url\": \"https://raw.githubusercontent.com/usuario/repositorio/main/data/ventas.csv\"\n  }\n}\n\n ```\n\n**Respuesta en caso de error:**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Validation Error\",\n  \"message\": \"La URL no apunta a un archivo CSV\"\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "list_datasets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=list_datasets&api_key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "list_datasets"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            },
+            "description": "La operación **List Datasets** permite consultar el listado completo de datasets registrados en la API.  \nEste endpoint devuelve todos los datasets almacenados en la hoja de control, incluyendo:\n\n- El identificador del dataset\n    \n- La URL registrada del archivo CSV\n    \n- El nombre del archivo\n    \n\nEsta operación es útil para:\n\n- Visualizar los datasets disponibles para consulta\n    \n- Verificar si un dataset ya fue registrado previamente\n    \n- Obtener el nombre exacto que debe enviarse en otros endpoints como `query_dataset` o `describe_dataset`\n    \n\nTodos los requests de esta operación requieren una **API Key válida**, enviada como parámetro en la solicitud.\n\n**Resultado esperada:**\n\nEn caso de correcto el sistema mostrará una lista como la siguiente:\n\n```\n{\n  \"ok\": true,\n  \"count\": 1,\n  \"data\": [\n    {\n      \"id\": \"4f3a6e66-2227-4016-a1f1-c0ca8a163461\",\n      \"url\": \"https://raw.githubusercontent.com/fatih-boyar/coffee-quality-data-CQI/main/df_arabica_clean.csv\",\n      \"name\": \"df_arabica_clean.csv\"\n    }\n  ]\n}\n\n ```\n\nEn caso de que no exista ningun dataset registrado el API devolverá la siguiente respuesta:\n\n```\n\n{\n  \"ok\": true,\n  \"count\": 0,\n  \"data\": []\n}\n\n ```\n\n**Respuesta en caso de error:**\n\n```\n\n{\n  \"ok\": false,\n  \"error\": \"Unauthorized\",\n  \"message\": \"Debes enviar una API key válida en ?api_key=...\"\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "export_dataset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&export=csv",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                },
+                {
+                  "key": "export",
+                  "value": "csv"
+                }
+              ]
+            },
+            "description": "La operación **Export Dataset** permite descargar directamente un dataset registrado en la API en formato CSV.\n\nEste endpoint toma como base un dataset previamente registrado y devuelve su contenido como archivo CSV listo para exportar o descargar.\n\nEsta operación es útil para:\n\n- Obtener el contenido completo de un dataset registrado\n    \n- Descargar la información en formato CSV\n    \n\nPara ejecutar esta operación es necesario enviar:\n\n- `action=query_dataset`\n    \n- `api_key válida`\n    \n- `dataset` con el nombre exacto del archivo registrado, hablamos de la propiedad \"_name_\" del dataset, devuelta al momento de registrar_dataset o al momento de consultar la lista de dataset.\n    \n\nEl valor enviado en dataset debe coincidir exactamente con el nombre del archivo almacenado en la API, por ejemplo: df_arabica_clean.csv\n\nTodos los requests requieren una **API Key** válida, enviada como parámetro en la solicitud.\n\n**Respuesta en caso de error:**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Bad Request\",\n  \"message\": \"No existe un dataset registrado con ese nombre\"\n}\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "La sección **Dataset Management** reúne las funcionalidades básicas para administrar los datasets registrados en la API.\n\nA través de estos endpoints es posible:\n\n- Registrar nuevos datasets, los cuales seran links de github que almacenan archivos CSV\n    \n- Consultar el listado de datasets disponibles\n    \n- Exportar la información de un dataset en formato CSV directamente desde la API\n    \n\nTodos los endpoints de esta sección requieren una **API Key válida**, la cual debe enviarse como parámetro en cada solicitud. [Ver endpoint para crear keys](https://georgemedin-74227.postman.co/workspace/ec17dc4c-01bd-4db9-896d-667fadbd68ef/request/52591381-a9e59c88-e362-48b0-8d6b-a7e1cf8dff90?action=share&source=copy-link&creator=52591381)"
+    },
+    {
+      "name": "Data Access",
+      "item": [
+        {
+          "name": "query_dataset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}\n",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}\n"
+                }
+              ]
+            },
+            "description": "La operación **query_dataset** permite consultar el contenido de un dataset previamente registrado en la API.\n\nEste endpoint obtiene los datos del archivo CSV asociado al dataset y los devuelve en formato JSON.\n\nEsta operación es útil para:\n\n- Consultar el contenido completo de un dataset\n    \n- Integrar los datos en programas como Power BI, Python u otros\n    \n- Obtener la información base antes de aplicar filtros, ordenamientos o agrupaciones\n    \n\nPara ejecutar esta operación es necesario enviar:\n\n- `action=query_dataset`\n    \n- `api_key válida`\n    \n- `dataset` con el nombre exacto del archivo registrado, hablamos de la propiedad \"_**name**_\" del dataset, devuelta al momento de registrar dataset o al momento de consultar la lista de dataset.\n    \n\nEl valor enviado en dataset debe coincidir exactamente con el nombre del archivo almacenado en la API, por ejemplo: df_arabica_clean.csv\n\n**Respuesta en caso de que no se envie dataset**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Bad Request\",\n  \"message\": \"Debes enviar un dataset usando ?dataset=nombre.csv. También puedes listar los disponibles con action=list_datasets\"\n}\n\n ```\n\n**Respuesta en caso de error:**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Bad Request\",\n  \"message\": \"No existe un dataset registrado con ese nombre\"\n}\n\n ```"
+          },
+          "response": []
+        },
+        {
+          "name": "describe_dataset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=describe_dataset&api_key={{api_key}}&dataset={{dataset_name}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "describe_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                }
+              ]
+            },
+            "description": "La operación **describe_dataset** permite analizar la estructura de un dataset previamente registrado en la API.\n\nEste endpoint inspecciona el archivo CSV asociado y devuelve información sobre sus columnas, incluyendo:\n\n- Nombre de la columna\n    \n- Tipo de dato estimado (string o number)\n    \n- Cantidad de valores nulos\n    \n\nEsta operación es útil para:\n\n- Entender la estructura del dataset antes de consultarlo\n    \n- Identificar qué columnas pueden usarse en filtros, agrupaciones o agregaciones\n    \n- Validar la calidad de los datos (valores nulos o inconsistencias)\n    \n\nPara ejecutar esta operación es necesario enviar:\n\n- `action=describe_dataset`\n    \n- `api_key` válida\n    \n- `dataset` con el nombre exacto del archivo registrado, hablamos de la propiedad \"_**name**_\" del dataset, devuelta al momento de registrar dataset o al momento de consultar la lista de dataset.\n    \n\nEl valor enviado en dataset debe coincidir exactamente con el nombre del archivo almacenado en la API, por ejemplo: df_arabica_clean.csv\n\nTodos los requests requieren una **API Key** válida, enviada como parámetro en la solicitud.\n\n**Respuesta en caso de que no se envie dataset**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Bad Request\",\n  \"message\": \"Debes enviar un dataset usando ?dataset=nombre.csv. También puedes listar los disponibles con action=list_datasets\"\n}\n\n ```\n\n**Respuesta en caso de error:**\n\n```\n{\n  \"ok\": false,\n  \"error\": \"Bad Request\",\n  \"message\": \"No existe un dataset registrado con ese nombre\"\n}\n\n ```"
+          },
+          "response": []
+        }
+      ],
+      "description": "La sección **Data Access** reúne las operaciones destinadas a consultar datasets previamente registrados en la API.\n\nA través de estos endpoints es posible:\n\n- Consultar el contenido de un dataset registrado\n    \n- Obtener las propiedades o estructura de un dataset\n    \n- Identificar las columnas disponibles antes de ejecutar filtros, agrupaciones u otras operaciones\n    \n\nTodos los endpoints de esta sección requieren una **API Key** válida, la cual debe enviarse como parámetro en cada solicitud."
+    },
+    {
+      "name": "Data Operations",
+      "item": [
+        {
+          "name": "filter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&filter=columna:valor",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                },
+                {
+                  "key": "filter",
+                  "value": "columna:valor"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "select fields",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&fields=col1,col2,col3",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                },
+                {
+                  "key": "fields",
+                  "value": "col1,col2,col3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "order by",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&order_by={{columna}} {{asc o desc}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                },
+                {
+                  "key": "order_by",
+                  "value": "{{columna}} {{asc o desc}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "group by + aggregation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&group_by={{columna}}&agg=SUM({{columna_numerica}})",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                },
+                {
+                  "key": "group_by",
+                  "value": "{{columna}}"
+                },
+                {
+                  "key": "agg",
+                  "value": "SUM({{columna_numerica}})"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "limit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&limit={{number}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "query_dataset"
+                },
+                {
+                  "key": "api_key",
+                  "value": "{{api_key}}"
+                },
+                {
+                  "key": "dataset",
+                  "value": "{{dataset_name}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "{{number}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "La sección **Dataset Operations** reúne las funcionalidades avanzadas para transformar y consultar datasets registrados en la API.\n\nA través de estos parámetros es posible modificar el resultado de un dataset, permitiendo aplicar filtros, selección de columnas, ordenamientos, agrupaciones y agregaciones directamente desde la URL.\n\nLas operaciones disponibles son:\n\n### 🔹 Filter (Filtrado de registros)\n\nPermite filtrar registros por valores exactos en una o múltiples columnas.\n\n```\n?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&filter=columna:valor\n\n ```\n\nStartFragment\n\n### 🔹 Select Fields (Selección de columnas)\n\nPermite retornar únicamente las columnas especificadas.\n\n```\n?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&fields=col1,col2,col3\n\n ```\n\n### 🔹 Order By (Ordenamiento)\n\nPermite ordenar los resultados por una columna en orden ascendente o descendente.\n\n```\n?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&order_by=columna asc\nó\n?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&order_by=columna desc\n\n ```\n\n### 🔹 Group By + Aggregation\n\nPermite agrupar los datos por una columna y aplicar una función de agregación.\n\n(Solo se soporta SUM actualmente)\n\n```\n?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&group_by=columna&agg=SUM(columna_numerica\n\n ```\n\n### 🔹 Limit (Límite de registros)\n\nPermite limitar la cantidad de resultados retornados.\n\n```\n?action=query_dataset&api_key={{api_key}}&dataset={{dataset_name}}&limit=10\n\n ```\n\n### 🔹 Export CSV (Exportación de resultados)\n\nPermite exportar el resultado de la consulta en formato CSV, incluso despues de escribir en nuestra url un conjunto de operaciones como Filtro, Seleccion de Columnas y/o otros. Basta con escribir al final de la URL `_**&export=csv**_`"
+    }
+  ]
+}
