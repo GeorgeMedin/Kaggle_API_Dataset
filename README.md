@@ -79,14 +79,11 @@ https://script.google.com/macros/s/AKfycbxjF06rPJX5iJ0sDRu3HZsysXG2m7gD2ybL6rtFY
 
 # Arquitectura general
 
-La API usa dos hojas dentro de un Google Spreadsheet:
-
-- **users**
-- **data**
+La API usa dos hojas dentro de un Google Spreadsheet, que es capaz de almacenar los usuarios y los dataset.
 
 El flujo general es:
 
-1. El usuario obtiene sus credenciales por otro proceso externo.
+1. El usuario obtiene sus credenciales mediante el siguiente link: [Clic aqui](https://script.google.com/macros/s/AKfycbwMq5B5C975dxUSeG_fE8-PQtJpSznWL9oZEmq5sDcDCA9dFZloXwgwX10aFhXRYO11Lg/exec)
 2. Usa `user` + `pass` para generar una `api_key`.
 3. Usa la `api_key` para acceder al resto de acciones.
 4. Registra datasets CSV públicos.
