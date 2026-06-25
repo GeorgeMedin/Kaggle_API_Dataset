@@ -2,6 +2,8 @@
 
 API HTTP estilo REST-like construida con **Google Apps Script** para registrar, listar, describir y consultar datasets CSV a partir de URLs públicas.
 
+[Consulta el Postman detallado aqui](https://georgemedin-74227.postman.co/workspace/Jorge-Medina-Rincon's-Workspace~ec17dc4c-01bd-4db9-896d-667fadbd68ef/collection/52591381-53833da3-defc-4403-b6a6-36d86955eea7?action=share&source=copy-link&creator=52591381)
+
 > Proyecto creado con fines de **estudio y práctica**, especialmente para aprender a consumir APIs desde herramientas y lenguajes como:
 >
 > - Python
